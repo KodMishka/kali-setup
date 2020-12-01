@@ -1,15 +1,15 @@
 #!/bin/sh
 
+username=$1
+
 ##packages
-apt update
 apt-get install -y seclists
 apt-get install -y gobuster
 apt-get install -y joplin
 apt-get install -y konsole
-apt-get autoremove open-vm-tools && apt-get install -y open-vm-tools-desktop
-
+apt-get autoremove -y open-vm-tools && apt-get install -y open-vm-tools-desktop
 ## shells
-mkdir /home/douglas/shells && cd /home/douglas/shells
+mkdir /home/douglas/shells && cd /home/$username/shells
 
 ### aspx cmd
 wget https://raw.githubusercontent.com/tennc/webshell/master/fuzzdb-webshell/asp/cmd.aspx
@@ -33,7 +33,7 @@ wget https://gist.githubusercontent.com/gazcbm/ea7206fbbad83f62080e0bbbeda77d9c/
 wget https://raw.githubusercontent.com/WhiteWinterWolf/wwwolf-php-webshell/master/webshell.php -O wwwolfshell.php
 
 ## tools
-mkdir /home/douglas/tools && cd /home/douglas/tools
+mkdir /home/douglas/tools && cd /home/$username/tools
 
 ###msfvenom payload creator
 wget https://raw.githubusercontent.com/g0tmi1k/msfpc/master/msfpc.sh
@@ -46,7 +46,7 @@ wget https://raw.githubusercontent.com/openwall/john/bleeding-jumbo/run/ssh2john
 wget https://raw.githubusercontent.com/21y4d/nmapAutomator/master/nmapAutomator.sh && chmod +x nmapAutomator.sh
 
 ### windows privesc
-mkdir /home/douglas/tools/winprivesc/ && cd /home/douglas/tools/winprivesc
+mkdir /home/douglas/tools/winprivesc/ && cd /home/$username/tools/winprivesc
 
 ### windows exploit suggester
 wget https://raw.githubusercontent.com/AonCyberLabs/Windows-Exploit-Suggester/master/windows-exploit-suggester.py
@@ -58,7 +58,7 @@ wget https://github.com/carlospolop/privilege-escalation-awesome-scripts-suite/r
 wget https://github.com/carlospolop/privilege-escalation-awesome-scripts-suite/blob/master/winPEAS/winPEASexe/winPEAS/bin/x86/Release/winPEAS.exe -O 86Winpeas.exe
 
 ### linux privesc
-mkdir /home/douglas/tools/linprivesc/ && cd /home/douglas/tools/linprivesc
+mkdir /home/douglas/tools/linprivesc/ && cd /home/$username/tools/linprivesc
 
 #### linpeas
 wget https://raw.githubusercontent.com/carlospolop/privilege-escalation-awesome-scripts-suite/master/linPEAS/linpeas.sh
@@ -84,9 +84,9 @@ chmod +x pspy*
 
 ## aliases
 
-echo "alias automap='sudo bash /home/douglas/tools/nmapAutomator.sh'" >> /home/douglas/.zshrc
-echo "alias simp='python -m SimpleHTTPServer'" >> /home/douglas/.zshrc
-echo "alias msfpc='bash /home/douglas/tools/msfpc.sh'" >> /home/douglas/.zshrc
+echo "alias automap='sudo bash /home/douglas/tools/nmapAutomator.sh'" >> /home/$username/.zshrc
+echo "alias simp='python -m SimpleHTTPServer'" >> /home/$username/.zshrc
+echo "alias msfpc='bash /home/douglas/tools/msfpc.sh'" >> /home/$username/.zshrc
 
 ## swtich to plasma
 apt-get update && apt-get install -y kali-defaults kali-root-login desktop-base kde-plasma-desktop
