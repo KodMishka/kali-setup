@@ -6,6 +6,7 @@ apt-get install -y seclists
 apt-get install -y gobuster
 apt-get install -y joplin
 apt-get install -y konsole
+apt-get autoremove open-vm-tools && apt-get install -y open-vm-tools-desktop
 
 ## shells
 mkdir /home/douglas/shells && cd /home/douglas/shells
