@@ -13,6 +13,7 @@ apt-get autoremove -y open-vm-tools && apt-get install -y open-vm-tools-desktop
 curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
 python get-pip.py
 export PATH="/home/$username/.local/bin":$PATH
+python /home/$username/.local/bin/pip install --upgrade setuptools
 
 ## shells
 mkdir /home/douglas/shells && cd /home/$username/shells
