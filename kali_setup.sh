@@ -3,10 +3,7 @@
 username=$1
 
 ## packages
-apt-get install -y seclists
-apt-get install -y gobuster
-apt-get install -y joplin
-apt-get install -y konsole
+apt-get install -y seclists gobuster joplin konsole gcc-multilib
 apt-get autoremove -y open-vm-tools && apt-get install -y open-vm-tools-desktop
 
 ## pip2
