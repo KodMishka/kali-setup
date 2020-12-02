@@ -2,12 +2,18 @@
 
 username=$1
 
-##packages
+## packages
 apt-get install -y seclists
 apt-get install -y gobuster
 apt-get install -y joplin
 apt-get install -y konsole
 apt-get autoremove -y open-vm-tools && apt-get install -y open-vm-tools-desktop
+
+## pip2
+curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+python get-pip.py
+export PATH="/home/$username/.local/bin":$PATH
+
 ## shells
 mkdir /home/douglas/shells && cd /home/$username/shells
 
