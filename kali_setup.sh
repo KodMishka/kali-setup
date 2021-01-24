@@ -92,9 +92,6 @@ echo "alias automap='sudo bash /home/douglas/tools/nmapAutomator.sh'" >> /home/$
 echo "alias simp='python -m SimpleHTTPServer'" >> /home/$username/.zshrc
 echo "alias msfpc='bash /home/douglas/tools/msfpc.sh'" >> /home/$username/.zshrc
 
-## swtich to plasma
-apt-get update && apt-get install -y kali-defaults kali-root-login desktop-base kde-plasma-desktop
-update-alternatives --config x-session-manager
 
 ## reboot
 reboot
