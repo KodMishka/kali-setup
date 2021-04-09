@@ -1,97 +1,48 @@
-#!/bin/sh
-
-username=$1
-
-## packages
-apt-get install -y seclists gobuster joplin konsole gcc-multilib
-apt-get autoremove -y open-vm-tools && apt-get install -y open-vm-tools-desktop
-
-## pip2
-curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
-python get-pip.py
-export PATH="/home/$username/.local/bin":$PATH
-python /home/$username/.local/bin/pip install --upgrade setuptools
-
-## shells
-mkdir /home/douglas/shells && cd /home/$username/shells
-
-### aspx cmd
-wget https://raw.githubusercontent.com/tennc/webshell/master/fuzzdb-webshell/asp/cmd.aspx
-
-### cmd war
-wget https://github.com/SecurityRiskAdvisors/cmd.jsp/blob/master/cmd.jsp
-
-### cmd jsp
-wget https://github.com/SecurityRiskAdvisors/cmd.jsp/blob/master/cmd.war
-
-### php one-liner
-echo "<?php echo shell_exec(['cmd']); ?>" > oneliner.php
-
-### php reverse shell
-wget https://raw.githubusercontent.com/pentestmonkey/php-reverse-shell/master/php-reverse-shell.php
-
-### shell command webconfig 
-wget https://gist.githubusercontent.com/gazcbm/ea7206fbbad83f62080e0bbbeda77d9c/raw/8173f5041c9a69cc58e980717ebe044f8eff9e9f/shell%2520command%2520web.config -O cmd_web.config
-
-### wwwolf webshell
-wget https://raw.githubusercontent.com/WhiteWinterWolf/wwwolf-php-webshell/master/webshell.php -O wwwolfshell.php
-
-## tools
-mkdir /home/douglas/tools && cd /home/$username/tools
-
-###msfvenom payload creator
-wget https://raw.githubusercontent.com/g0tmi1k/msfpc/master/msfpc.sh
-chmod +x msfpc.sh
-
-### ssh2john
-wget https://raw.githubusercontent.com/openwall/john/bleeding-jumbo/run/ssh2john.py
-
-### nmapautomator
-wget https://raw.githubusercontent.com/21y4d/nmapAutomator/master/nmapAutomator.sh && chmod +x nmapAutomator.sh
+wget https://raw.githubusercontent.com/21y4d/nmapAutomator/master/nmapAutomator.sh 
+chmod +x nmapAutomator.sh
+mv nmapAutomator.sh $toolsDir
 
 ### windows privesc
-mkdir /home/douglas/tools/winprivesc/ && cd /home/$username/tools/winprivesc
+mkdir /home/$username/tools/winprivesc/ 
+winPrivDir="/home/$username/tools/winprivesc/"
 
 ### windows exploit suggester
-wget https://raw.githubusercontent.com/AonCyberLabs/Windows-Exploit-Suggester/master/windows-exploit-suggester.py
+wget https://raw.githubusercontent.com/AonCyberLabs/Windows-Exploit-Suggester/master/windows-exploit-suggester.py -P $winPrivDir
 
 #### winpeas
 
-wget https://github.com/carlospolop/privilege-escalation-awesome-scripts-suite/raw/master/winPEAS/winPEASexe/winPEAS/bin/x64/Release/winPEAS.exe -O 64Winpeas.exe
+wget https://github.com/carlospolop/privilege-escalation-awesome-scripts-suite/raw/master/winPEAS/winPEASexe/winPEAS/bin/x64/Release/winPEAS.exe -O 64Winpeas.exe -P $winPrivDir
 
-wget https://github.com/carlospolop/privilege-escalation-awesome-scripts-suite/blob/master/winPEAS/winPEASexe/winPEAS/bin/x86/Release/winPEAS.exe -O 86Winpeas.exe
+wget https://github.com/carlospolop/privilege-escalation-awesome-scripts-suite/blob/master/winPEAS/winPEASexe/winPEAS/bin/x86/Release/winPEAS.exe -O 86Winpeas.exe -P $winPrivDir
 
 ### linux privesc
-mkdir /home/douglas/tools/linprivesc/ && cd /home/$username/tools/linprivesc
+mkdir /home/$username/tools/linprivesc/ 
+linPrivDir="/home/$username/tools/linprivesc/"
 
 #### linpeas
-wget https://raw.githubusercontent.com/carlospolop/privilege-escalation-awesome-scripts-suite/master/linPEAS/linpeas.sh
+wget https://raw.githubusercontent.com/carlospolop/privilege-escalation-awesome-scripts-suite/master/linPEAS/linpeas.sh -P $linPrivDir
 
 #### linenum
-wget https://raw.githubusercontent.com/rebootuser/LinEnum/master/LinEnum.sh
+wget https://raw.githubusercontent.com/rebootuser/LinEnum/master/LinEnum.sh -P $linPrivDir
 
 #### linux-exploit-suggester
-wget https://raw.githubusercontent.com/mzet-/linux-exploit-suggester/master/linux-exploit-suggester.sh
+wget https://raw.githubusercontent.com/mzet-/linux-exploit-suggester/master/linux-exploit-suggester.sh -P $linPrivDir
 
 #### lse
-wget https://raw.githubusercontent.com/diego-treitos/linux-smart-enumeration/master/lse.sh
+wget https://raw.githubusercontent.com/diego-treitos/linux-smart-enumeration/master/lse.sh -P $linPrivDir
 
 #### linuxprivchecker
-wget https://raw.githubusercontent.com/sleventyeleven/linuxprivchecker/master/linuxprivchecker.py
+wget https://raw.githubusercontent.com/sleventyeleven/linuxprivchecker/master/linuxprivchecker.py -P $linPrivDir
 
 #### pspy_all_versions
-wget https://github.com/DominicBreuker/pspy/releases/download/v1.2.0/pspy64
-wget https://github.com/DominicBreuker/pspy/releases/download/v1.2.0/pspy64s
-wget https://github.com/DominicBreuker/pspy/releases/download/v1.2.0/pspy32
-wget https://github.com/DominicBreuker/pspy/releases/download/v1.2.0/pspy32s
-chmod +x pspy*
+wget https://github.com/DominicBreuker/pspy/releases/download/v1.2.0/pspy64 -P $linPrivDir
+wget https://github.com/DominicBreuker/pspy/releases/download/v1.2.0/pspy64s -P $linPrivDir
+wget https://github.com/DominicBreuker/pspy/releases/download/v1.2.0/pspy32 -P $linPrivDir
+wget https://github.com/DominicBreuker/pspy/releases/download/v1.2.0/pspy32s -P $linPrivDir
+chmod +x $linPrivDir/pspy*
 
 ## aliases
 
 echo "alias automap='sudo bash /home/douglas/tools/nmapAutomator.sh'" >> /home/$username/.zshrc
 echo "alias simp='python -m SimpleHTTPServer'" >> /home/$username/.zshrc
 echo "alias msfpc='bash /home/douglas/tools/msfpc.sh'" >> /home/$username/.zshrc
-
-
-## reboot
-reboot
